@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# IDE
+.idea
+
+# lib
+Alfred_Workflow*/
+workflow/
+
 # Distribution / packaging
 .Python
 build/
