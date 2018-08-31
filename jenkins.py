@@ -6,9 +6,27 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+ICON_UPDATE = 'icon_update.png'
+
+
+def check_update(wf):
+    # 检查更新
+    if wf.update_available:
+        arg = ['', '', '', '', 'error']
+        arg = '$%'.join(arg)
+        wf.add_item(
+            title='有新版本更新', subtitle='', arg=arg,
+            valid=True, icon=ICON_UPDATE)
+    else:
+        wf.add_item('Jenkins Helper')
+    wf.send_feedback()
+
 
 def main(wf):
-    command = wf.args[0]
+    command = wf.args[0].strip().replace("\\", "")
+    if not command:
+        check_update(wf)
+
     query = wf.args[1] if len(wf.args) > 1 else None
     interface = JenkinsInterface(wf)
 
@@ -64,5 +82,7 @@ def main(wf):
 
 
 if __name__ == u'__main__':
-    wf = Workflow3()
+    wf = Workflow3(update_settings={
+        'github_slug': 'kenneth-hao/alfred-workflow-jenkins-helper',
+    })
     sys.exit(wf.run(main))
