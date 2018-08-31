@@ -19,8 +19,14 @@ class JenkinsInterface(object):
         self._workflow.settings['jenkins_url'] = url
         self._workflow.settings.save()
 
+    def set_job_build_default_branch(self, query):
+        query = query.split(u' ')
+        job = query[0]
+        default_branch = query[1]
+        self._workflow.settings['job_build_default_branch' + ':' + job] = default_branch
+        self._workflow.settings.save()
+
     def set_login(self, query):
-        self._workflow.logger.debug(query)
         query = query.split(u' ')
         username = query[0]
         api_token = query[1]
@@ -40,6 +46,16 @@ class JenkinsInterface(object):
                 jobs.append(Job(job, https))
         return jobs
 
+    '''
+    eg. https://jk.dxy.net/job/ask/
+    '''
+    @staticmethod
+    def parse_job_name_by_url(url):
+        job = url[url.find("/", url.find('/', url.find('://') + 3) + 1) + 1:]
+        if job.endswith("/"):
+            job = job[:-1]
+        return job
+
     def valid_setting(self):
         if not self.get_jenkins_url():
             raise NotSettingURL
@@ -58,7 +74,12 @@ class JenkinsInterface(object):
         self.valid_setting()
         r = web.get(self.get_jenkins_url() + "/crumbIssuer/api/json", headers=self.append_auth_2_header())
         crumb = r.json().get(u'crumb')
-        branch = "test"
+
+        job = self.parse_job_name_by_url(query)
+        branch = self._workflow.settings.get('job_build_default_branch' + ':' + job)
+        if not branch:
+            branch = "test"
+
         data = {"branch": branch, "Jenkins-Crumb": crumb}
         r = web.post(query + '/buildWithParameters', data=data, headers=self.append_auth_2_header())
         if r.status_code == 201:
@@ -112,3 +133,4 @@ class BuildFail(Exception):
 
 class NoJobsFound(Exception):
     pass
+

@@ -40,6 +40,7 @@ def main(wf):
         'build': interface.build_job,
         'set_url': interface.set_jenkins_url,
         'login': interface.set_login,
+        'set_job_build_default_branch': interface.set_job_build_default_branch,
         'clear_login': interface.clear_login,
     }
 
@@ -70,11 +71,11 @@ def main(wf):
                         arg=job.url,
                         valid=True,
                         icon=job.image
-                        ).add_modifier(key='ctrl', subtitle='Trigger a build, and open')
+                        ).add_modifier(key='ctrl', subtitle='Trigger a build')
     elif action_other:
         try:
             if action_other(query):
-                wf.add_item(query, subtitle='构建成功', arg=query, valid=True)
+                wf.add_item(query, subtitle='Build Trigger Success', arg=query, valid=True)
         except BuildFail:
             wf.add_item(query, subtitle='构建失败', arg=query, valid=True)
 
@@ -86,3 +87,5 @@ if __name__ == u'__main__':
         'github_slug': 'kenneth-hao/alfred-workflow-jenkins-helper',
     })
     sys.exit(wf.run(main))
+
+

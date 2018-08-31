@@ -57,6 +57,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>89F07408-E307-4209-9CFB-74C5622111E3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E6BB0928-C979-4EF8-ABBC-6B64492282EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E5FA67DD-CA3C-428D-8EA8-826E8807CAC3</key>
 		<array>
 			<dict>
@@ -282,6 +295,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>jks_jbdb</string>
+				<key>subtext</key>
+				<string>jbdb &lt;job&gt; &lt;default_branch&gt;</string>
+				<key>text</key>
+				<string>Setting Jenkins Job Build Default Branch</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>89F07408-E307-4209-9CFB-74C5622111E3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/python jenkins.py set_job_build_default_branch "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E6BB0928-C979-4EF8-ABBC-6B64492282EB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -315,6 +372,13 @@
 			<key>ypos</key>
 			<integer>510</integer>
 		</dict>
+		<key>89F07408-E307-4209-9CFB-74C5622111E3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>650</integer>
+		</dict>
 		<key>ACE61C84-9776-41F6-BED6-C9BC9BCA97CE</key>
 		<dict>
 			<key>xpos</key>
@@ -335,6 +399,13 @@
 			<integer>210</integer>
 			<key>ypos</key>
 			<integer>370</integer>
+		</dict>
+		<key>E6BB0928-C979-4EF8-ABBC-6B64492282EB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>470</integer>
+			<key>ypos</key>
+			<integer>650</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>
