@@ -303,7 +303,7 @@
 				<key>keyword</key>
 				<string>jks_jbdb</string>
 				<key>subtext</key>
-				<string>jbdb &lt;job&gt; &lt;default_branch&gt;  By Default, the branch is test.</string>
+				<string>jks_jbdb &lt;job&gt; &lt;default_branch&gt;  By Default, the branch is test.</string>
 				<key>text</key>
 				<string>Setting Jenkins Job Build Default Branch</string>
 				<key>withspace</key>
